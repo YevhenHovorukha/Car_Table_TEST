@@ -6,7 +6,7 @@ import MyLoading from "./components/MyLoading";
 import MyTable from "./components/MyTable";
 import { ICar } from "./components/types/types";
 import { Button } from "@mui/material";
-import { getCarsData } from "./utils/getCarsData";
+import { getCarsData } from "./utils/helpers";
 import AddModal from "./components/AddModal";
 
 const App = () => {

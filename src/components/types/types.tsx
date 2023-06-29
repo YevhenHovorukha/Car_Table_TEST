@@ -18,5 +18,5 @@ export interface ICarTableData {
   Year: number;
   Price: string;
   Availability: string;
-  Actions: JSX.Element[];
+  Actions?: JSX.Element[];
 }

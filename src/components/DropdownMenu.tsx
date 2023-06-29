@@ -8,12 +8,14 @@ import React, {
 import { Button, Menu, MenuItem } from "@mui/material";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import { ICarTableData } from "./types/types";
 
 interface DropdownMenuProps {
-  children: ReactElement | ReactNode;
+  car: ICarTableData;
+  children?: ReactElement | ReactNode;
 }
 
-const DropdownMenu = ({ children }: DropdownMenuProps) => {
+const DropdownMenu = ({ car, children }: DropdownMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDeleteModal, setDeleteOpenModal] = useState(false);
   const [openEditModal, setEditOpenModal] = useState(false);
@@ -44,16 +46,21 @@ const DropdownMenu = ({ children }: DropdownMenuProps) => {
 
   return (
     <>
-      <Button onClick={handleClick}>Dropdown</Button>
+      <Button onClick={handleClick}>Action</Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handlDeleteOpen}>Delete</MenuItem>
         <MenuItem onClick={handlEditOpen}>Edit</MenuItem>
       </Menu>
       <DeleteModal
+        car={car}
         open={openDeleteModal}
         handleDeleteClose={handleDeleteClose}
       />
-      <EditModal open={openEditModal} handleEditClose={handleEditClose} />
+      <EditModal
+        car={car}
+        open={openEditModal}
+        handleEditClose={handleEditClose}
+      />
     </>
   );
 };

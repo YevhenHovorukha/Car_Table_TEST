@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICar } from "../components/types/types";
+import { ICar, ICarTableData } from "../components/types/types";
 
 const getCarsData = async () => {
   const data = await axios.get("https://myfakeapi.com/api/cars/");
@@ -17,4 +17,8 @@ const getCarsData = async () => {
   return newData;
 };
 
-export { getCarsData };
+const inputIsDisabled = (obj: ICarTableData): boolean => {
+  return Object.values(obj).some((value) => value === "" || value === 0);
+};
+
+export { getCarsData, inputIsDisabled };

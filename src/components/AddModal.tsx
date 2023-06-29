@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import { SelectChangeEvent } from "@mui/material";
 import { useQueryClient } from "react-query";
+import { inputIsDisabled } from "../utils/getCarsData";
 
 const style = {
   position: "absolute",
@@ -171,9 +172,7 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
                 variant="contained"
                 onClick={handleAdd}
                 style={{ marginRight: "10px" }}
-                disabled={Object.values(carData).some(
-                  (value) => value === "" || value === 0
-                )}
+                disabled={inputIsDisabled(carData)}
               >
                 Add
               </Button>

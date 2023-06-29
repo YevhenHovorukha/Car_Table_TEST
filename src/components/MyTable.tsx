@@ -8,7 +8,6 @@ import {
   TableRow,
   Paper,
   TablePagination,
-  Button,
 } from "@mui/material";
 import { useQueryClient } from "react-query";
 import { ICarTableData } from "./types/types";
@@ -49,7 +48,7 @@ const MyTable = () => {
   const newData = data?.map((car) => {
     return {
       ...car,
-      Actions: [<DropdownMenu key={car.id}>Action</DropdownMenu>],
+      Actions: [<DropdownMenu key={car.id} car={car} />],
     };
   });
   return (
