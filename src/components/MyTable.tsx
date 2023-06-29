@@ -21,22 +21,6 @@ const MyTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const updateData = () => {
-    const newData = data.slice();
-    newData.unshift({
-      id: 1,
-      Company: "car.car,",
-      Model: "car.car_model",
-      VIN: "ar.car_vin",
-      Color: "car.car_color",
-      Year: 1996,
-      Price: "car.price",
-      Availability: "yes",
-      Actions: [],
-    });
-    queryClient.setQueryData("carsData", newData);
-  };
-
   const columns: string[] = [
     "Company",
     "Model",
@@ -60,7 +44,6 @@ const MyTable = () => {
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-    updateData();
   };
 
   const newData = data?.map((car) => {
@@ -73,8 +56,8 @@ const MyTable = () => {
     <TableContainer
       component={Paper}
       sx={{
-        m: "1 0",
-        width: "100vw",
+        margin: "10px",
+        width: "98vw",
         border: "1px solid rgba(224, 224, 224, 1)",
       }}
     >

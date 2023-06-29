@@ -1,5 +1,3 @@
-import { ReactElement } from "react";
-
 export interface ICar {
   availability: boolean;
   car: string;

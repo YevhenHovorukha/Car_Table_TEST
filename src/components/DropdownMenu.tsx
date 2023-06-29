@@ -1,13 +1,22 @@
-import React, { ReactElement, ReactNode, useState } from "react";
+import React, {
+  HtmlHTMLAttributes,
+  MouseEventHandler,
+  ReactElement,
+  ReactNode,
+  useState,
+} from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
+import DeleteModal from "./DeleteModal";
+import EditModal from "./EditModal";
 
 interface DropdownMenuProps {
-  key: number;
   children: ReactElement | ReactNode;
 }
 
-const DropdownMenu = ({ key, children }: DropdownMenuProps) => {
+const DropdownMenu = ({ children }: DropdownMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openDeleteModal, setDeleteOpenModal] = useState(false);
+  const [openEditModal, setEditOpenModal] = useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -17,24 +26,35 @@ const DropdownMenu = ({ key, children }: DropdownMenuProps) => {
     setAnchorEl(null);
   };
 
-  const handleDelete = () => {
-    // Логика для удаления элемента
-    handleClose();
+  const handlDeleteOpen = (): void => {
+    setDeleteOpenModal(!openDeleteModal);
   };
 
-  const handleEdit = () => {
-    // Логика для редактирования элемента
-    handleClose();
+  const handleDeleteClose = (): void => {
+    setDeleteOpenModal(!openDeleteModal);
+  };
+
+  const handlEditOpen = (): void => {
+    setEditOpenModal(!openEditModal);
+  };
+
+  const handleEditClose = (): void => {
+    setEditOpenModal(!openEditModal);
   };
 
   return (
-    <div>
+    <>
       <Button onClick={handleClick}>Dropdown</Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleDelete}>Delete</MenuItem>
-        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handlDeleteOpen}>Delete</MenuItem>
+        <MenuItem onClick={handlEditOpen}>Edit</MenuItem>
       </Menu>
-    </div>
+      <DeleteModal
+        open={openDeleteModal}
+        handleDeleteClose={handleDeleteClose}
+      />
+      <EditModal open={openEditModal} handleEditClose={handleEditClose} />
+    </>
   );
 };
 
