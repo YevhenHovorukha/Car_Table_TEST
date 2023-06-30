@@ -23,7 +23,6 @@ interface AddModalProps {
 }
 
 const AddModal = ({ open, handleAddClose }: AddModalProps) => {
-  console.log("ADD");
   const queryClient = useQueryClient();
   const data: ICarTableData[] = queryClient.getQueryData("carsData") ?? [];
   const [carData, setCarData] = useState<ICarTableData>({

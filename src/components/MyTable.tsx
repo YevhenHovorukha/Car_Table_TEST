@@ -23,7 +23,6 @@ const StyledTableContainer = {
 const MyTable = () => {
   const queryClient = useQueryClient();
   const data: ICarTableData[] = queryClient.getQueryData("carsData") ?? [];
-  console.log(data);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
