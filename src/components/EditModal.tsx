@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -9,19 +9,12 @@ import TextField from "@mui/material/TextField";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import { inputIsDisabled } from "../utils/getCarsData";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { inputIsDisabled } from "../utils/helpers";
+import {
+  StyledBoxColumn,
+  StyledBoxFlexEnd,
+  StyleModalBox,
+} from "./styles/styles";
 
 interface EditModalProps {
   car: ICarTableData;
@@ -78,11 +71,11 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={StyleModalBox}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Edit {car.Company} {car.Model}
           </Typography>
-          <form>
+          <Box sx={StyledBoxColumn}>
             <TextField
               fullWidth
               label="Company"
@@ -90,7 +83,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Company}
               onChange={handleChangeTextField}
               placeholder="Company"
-              style={{ marginBottom: "10px" }}
               disabled
             />
 
@@ -101,7 +93,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Model}
               onChange={handleChangeTextField}
               placeholder="Model"
-              style={{ marginBottom: "10px" }}
               disabled
             />
             <TextField
@@ -111,7 +102,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.VIN}
               onChange={handleChangeTextField}
               placeholder="VIN"
-              style={{ marginBottom: "10px" }}
               disabled
             />
             <TextField
@@ -121,7 +111,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Color}
               onChange={handleChangeTextField}
               placeholder="Color"
-              style={{ marginBottom: "10px" }}
             />
             <TextField
               fullWidth
@@ -131,7 +120,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Year}
               onChange={handleChangeTextField}
               placeholder="Year"
-              style={{ marginBottom: "10px" }}
               disabled
             />
             <TextField
@@ -141,7 +129,6 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Price}
               onChange={handleChangeTextField}
               placeholder="Price"
-              style={{ marginBottom: "10px" }}
             />
             <InputLabel id="availability-label">Availability</InputLabel>
             <Select
@@ -151,16 +138,14 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               value={carData.Availability}
               onChange={handleChangeSelect}
               placeholder="Availability"
-              style={{ marginBottom: "10px" }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box sx={StyledBoxFlexEnd}>
               <Button
                 variant="contained"
                 onClick={handleAdd}
-                style={{ marginRight: "10px" }}
                 disabled={inputIsDisabled(carData)}
               >
                 Edit
@@ -168,8 +153,8 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
               <Button variant="contained" onClick={handleEditClose}>
                 Close
               </Button>
-            </div>
-          </form>
+            </Box>
+          </Box>
         </Box>
       </Modal>
     </div>

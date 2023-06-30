@@ -1,8 +1,12 @@
+import React from "react";
 import axios from "axios";
+import DropdownMenu from "../components/DropdownMenu";
 import { ICar, ICarTableData } from "../components/types/types";
 
+const URL = "https://myfakeapi.com/api/cars/";
+
 const getCarsData = async () => {
-  const data = await axios.get("https://myfakeapi.com/api/cars/");
+  const data = await axios.get(URL);
 
   const newData = await data.data.cars.map((car: ICar) => ({
     id: car.id,
@@ -21,4 +25,17 @@ const inputIsDisabled = (obj: ICarTableData): boolean => {
   return Object.values(obj).some((value) => value === "" || value === 0);
 };
 
-export { getCarsData, inputIsDisabled };
+const getTableColumns = () => {
+  return [
+    "Company",
+    "Model",
+    "VIN",
+    "Color",
+    "Year",
+    "Price",
+    "Availability",
+    "Actions",
+  ];
+};
+
+export { getCarsData, inputIsDisabled, getTableColumns };

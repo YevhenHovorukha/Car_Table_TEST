@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import axios, { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import MyLoading from "./components/MyLoading";
 import MyTable from "./components/MyTable";
@@ -8,6 +7,10 @@ import { ICar } from "./components/types/types";
 import { Button } from "@mui/material";
 import { getCarsData } from "./utils/helpers";
 import AddModal from "./components/AddModal";
+
+const ButtonStyled = {
+  margin: "10px",
+};
 
 const App = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -45,12 +48,12 @@ const App = () => {
   return (
     <>
       <Button
-        sx={{ margin: "10px" }}
+        sx={ButtonStyled}
         variant="contained"
         size="large"
         onClick={handlAddOpen}
       >
-        Add new Car
+        Add Car
       </Button>
       <MyTable />;
       <AddModal open={openAddModal} handleAddClose={handleAddClose} />

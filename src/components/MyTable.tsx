@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -12,6 +12,13 @@ import {
 import { useQueryClient } from "react-query";
 import { ICarTableData } from "./types/types";
 import DropdownMenu from "./DropdownMenu";
+import { getTableColumns } from "../utils/helpers";
+
+const StyledTableContainer = {
+  margin: "10px",
+  width: "98vw",
+  border: "1px solid rgba(224, 224, 224, 1)",
+};
 
 const MyTable = () => {
   const queryClient = useQueryClient();
@@ -20,16 +27,7 @@ const MyTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const columns: string[] = [
-    "Company",
-    "Model",
-    "VIN",
-    "Color",
-    "Year",
-    "Price",
-    "Availability",
-    "Actions",
-  ];
+  const columns: string[] = getTableColumns();
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
@@ -45,21 +43,17 @@ const MyTable = () => {
     setPage(0);
   };
 
-  const newData = data?.map((car) => {
-    return {
-      ...car,
-      Actions: [<DropdownMenu key={car.id} car={car} />],
-    };
-  });
+  const newData: ICarTableData[] = useMemo(() => {
+    return data?.map((car) => {
+      return {
+        ...car,
+        Actions: [<DropdownMenu key={car.id} car={car} />],
+      };
+    });
+  }, [data]);
+
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        margin: "10px",
-        width: "98vw",
-        border: "1px solid rgba(224, 224, 224, 1)",
-      }}
-    >
+    <TableContainer component={Paper} sx={StyledTableContainer}>
       <Table>
         <TableHead>
           <TableRow>

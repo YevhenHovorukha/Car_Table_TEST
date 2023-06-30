@@ -10,19 +10,12 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import { SelectChangeEvent } from "@mui/material";
 import { useQueryClient } from "react-query";
-import { inputIsDisabled } from "../utils/getCarsData";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import { inputIsDisabled } from "../utils/helpers";
+import {
+  StyledBoxColumn,
+  StyledBoxFlexEnd,
+  StyleModalBox,
+} from "./styles/styles";
 
 interface AddModalProps {
   open: boolean;
@@ -30,6 +23,7 @@ interface AddModalProps {
 }
 
 const AddModal = ({ open, handleAddClose }: AddModalProps) => {
+  console.log("ADD");
   const queryClient = useQueryClient();
   const data: ICarTableData[] = queryClient.getQueryData("carsData") ?? [];
   const [carData, setCarData] = useState<ICarTableData>({
@@ -39,7 +33,7 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
     VIN: "",
     Color: "",
     Year: 0,
-    Price: "",
+    Price: "$1000",
     Availability: "",
     Actions: [],
   });
@@ -79,7 +73,7 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
       VIN: "",
       Color: "",
       Year: 0,
-      Price: "",
+      Price: "$1000",
       Availability: "",
       Actions: [],
     });
@@ -93,11 +87,11 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={StyleModalBox}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add New Car
           </Typography>
-          <form>
+          <Box sx={StyledBoxColumn}>
             <TextField
               fullWidth
               label="Company"
@@ -105,7 +99,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Company}
               onChange={handleChangeTextField}
               placeholder="Company"
-              style={{ marginBottom: "10px" }}
             />
 
             <TextField
@@ -115,7 +108,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Model}
               onChange={handleChangeTextField}
               placeholder="Model"
-              style={{ marginBottom: "10px" }}
             />
             <TextField
               fullWidth
@@ -124,7 +116,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.VIN}
               onChange={handleChangeTextField}
               placeholder="VIN"
-              style={{ marginBottom: "10px" }}
             />
             <TextField
               fullWidth
@@ -133,7 +124,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Color}
               onChange={handleChangeTextField}
               placeholder="Color"
-              style={{ marginBottom: "10px" }}
             />
             <TextField
               fullWidth
@@ -143,7 +133,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Year}
               onChange={handleChangeTextField}
               placeholder="Year"
-              style={{ marginBottom: "10px" }}
             />
             <TextField
               fullWidth
@@ -152,7 +141,6 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Price}
               onChange={handleChangeTextField}
               placeholder="Price"
-              style={{ marginBottom: "10px" }}
             />
             <InputLabel id="availability-label">Availability</InputLabel>
             <Select
@@ -162,16 +150,14 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               value={carData.Availability}
               onChange={handleChangeSelect}
               placeholder="Availability"
-              style={{ marginBottom: "10px" }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
-            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box sx={StyledBoxFlexEnd}>
               <Button
                 variant="contained"
                 onClick={handleAdd}
-                style={{ marginRight: "10px" }}
                 disabled={inputIsDisabled(carData)}
               >
                 Add
@@ -179,8 +165,8 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
               <Button variant="contained" onClick={handleAddClose}>
                 Close
               </Button>
-            </div>
-          </form>
+            </Box>
+          </Box>
         </Box>
       </Modal>
     </div>

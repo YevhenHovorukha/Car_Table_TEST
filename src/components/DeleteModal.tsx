@@ -5,18 +5,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { ICarTableData } from "./types/types";
 import { useQueryClient } from "react-query";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import {
+  StyledBoxCenter,
+  StyledCenteredTypography,
+  StyleModalBox,
+} from "./styles/styles";
 
 interface DeleteModalProps {
   car: ICarTableData;
@@ -34,37 +27,31 @@ const DeleteModal = ({ car, open, handleDeleteClose }: DeleteModalProps) => {
   };
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleDeleteClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            style={{ display: "flex", justifyContent: "center" }}
-          >
-            Are you Sure?
-          </Typography>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Button
-              variant="contained"
-              style={{ marginRight: "10px" }}
-              onClick={handlerDeteleCar}
-            >
-              Yes
-            </Button>
-            <Button variant="contained" onClick={handleDeleteClose}>
-              No
-            </Button>
-          </div>
+    <Modal
+      open={open}
+      onClose={handleDeleteClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={StyleModalBox}>
+        <Typography
+          id="modal-modal-title"
+          variant="h6"
+          component="h2"
+          sx={StyledCenteredTypography}
+        >
+          Are you Sure?
+        </Typography>
+        <Box sx={StyledBoxCenter}>
+          <Button variant="contained" onClick={handlerDeteleCar}>
+            Yes
+          </Button>
+          <Button variant="contained" onClick={handleDeleteClose}>
+            No
+          </Button>
         </Box>
-      </Modal>
-    </div>
+      </Box>
+    </Modal>
   );
 };
 

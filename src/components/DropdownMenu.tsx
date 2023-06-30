@@ -1,10 +1,4 @@
-import React, {
-  HtmlHTMLAttributes,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  useState,
-} from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
@@ -15,7 +9,7 @@ interface DropdownMenuProps {
   children?: ReactElement | ReactNode;
 }
 
-const DropdownMenu = ({ car, children }: DropdownMenuProps) => {
+const DropdownMenu = ({ car }: DropdownMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDeleteModal, setDeleteOpenModal] = useState(false);
   const [openEditModal, setEditOpenModal] = useState(false);
