@@ -55,7 +55,7 @@ const App = () => {
       >
         Add Car
       </Button>
-      <MyTable />;
+      <MyTable />
       <AddModal open={openAddModal} handleAddClose={handleAddClose} />
     </>
   );
