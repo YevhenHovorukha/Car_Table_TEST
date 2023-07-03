@@ -38,4 +38,24 @@ const getTableColumns = () => {
   ];
 };
 
-export { getCarsData, inputIsDisabled, getTableColumns };
+const filterData = (
+  data: ICarTableData[],
+  searchValue: string
+): ICarTableData[] => {
+  if (!searchValue) return data;
+
+  const searchTerm = searchValue.toLowerCase();
+  return data.filter((car) => {
+    return Object.values(car).some((value) => {
+      if (
+        typeof value === "string" &&
+        value.toLowerCase().includes(searchTerm)
+      ) {
+        return true;
+      }
+      return false;
+    });
+  });
+};
+
+export { getCarsData, inputIsDisabled, getTableColumns, filterData };

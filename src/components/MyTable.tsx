@@ -12,19 +12,16 @@ import {
 import { useQueryClient } from "react-query";
 import { ICarTableData } from "./types/types";
 import DropdownMenu from "./DropdownMenu";
-import { getTableColumns } from "../utils/helpers";
-
-const StyledTableContainer = {
-  margin: "10px",
-  width: "98vw",
-  border: "1px solid rgba(224, 224, 224, 1)",
-};
+import { getTableColumns, filterData } from "../utils/helpers";
+import TextField from "@mui/material/TextField";
+import { StyledTableContainer, StyledTextFieldTable } from "./styles/styles";
 
 const MyTable = () => {
   const queryClient = useQueryClient();
   const data: ICarTableData[] = queryClient.getQueryData("carsData") ?? [];
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [searchValue, setSearchValue] = useState("");
 
   const columns: string[] = getTableColumns();
 
@@ -42,6 +39,10 @@ const MyTable = () => {
     setPage(0);
   };
 
+  const hanlderChangeSeacrh = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
   const newData: ICarTableData[] = useMemo(() => {
     return data?.map((car) => {
       return {
@@ -51,40 +52,52 @@ const MyTable = () => {
     });
   }, [data]);
 
+  const filteredData = filterData(newData, searchValue);
+
   return (
-    <TableContainer component={Paper} sx={StyledTableContainer}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((column, columnIndex) => (
-              <TableCell key={columnIndex}>{column}</TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {newData
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((car, carIndex) => (
-              <TableRow key={carIndex}>
-                {columns.map((column, columnIndex) => (
-                  <TableCell key={columnIndex}>
-                    {car[column as keyof typeof car]}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
+    <>
+      <TextField
+        sx={StyledTextFieldTable}
+        label="Search"
+        name="Search"
+        value={searchValue}
+        onChange={hanlderChangeSeacrh}
+        placeholder="Search"
       />
-    </TableContainer>
+      <TableContainer component={Paper} sx={StyledTableContainer}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {columns.map((column, columnIndex) => (
+                <TableCell key={columnIndex}>{column}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredData
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((car, carIndex) => (
+                <TableRow key={carIndex}>
+                  {columns.map((column, columnIndex) => (
+                    <TableCell key={columnIndex}>
+                      {car[column as keyof typeof car]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={filteredData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </TableContainer>
+    </>
   );
 };
 

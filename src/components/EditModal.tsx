@@ -64,100 +64,98 @@ const EditModal = ({ car, open, handleEditClose }: EditModalProps) => {
   };
 
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleEditClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={StyleModalBox}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit {car.Company} {car.Model}
-          </Typography>
-          <Box sx={StyledBoxColumn}>
-            <TextField
-              fullWidth
-              label="Company"
-              name="Company"
-              value={carData.Company}
-              onChange={handleChangeTextField}
-              placeholder="Company"
-              disabled
-            />
+    <Modal
+      open={open}
+      onClose={handleEditClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={StyleModalBox}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          Edit {car.Company} {car.Model}
+        </Typography>
+        <Box sx={StyledBoxColumn}>
+          <TextField
+            fullWidth
+            label="Company"
+            name="Company"
+            value={carData.Company}
+            onChange={handleChangeTextField}
+            placeholder="Company"
+            disabled
+          />
 
-            <TextField
-              fullWidth
-              label="Model"
-              name="Model"
-              value={carData.Model}
-              onChange={handleChangeTextField}
-              placeholder="Model"
-              disabled
-            />
-            <TextField
-              fullWidth
-              label="VIN"
-              name="VIN"
-              value={carData.VIN}
-              onChange={handleChangeTextField}
-              placeholder="VIN"
-              disabled
-            />
-            <TextField
-              fullWidth
-              label="Color"
-              name="Color"
-              value={carData.Color}
-              onChange={handleChangeTextField}
-              placeholder="Color"
-            />
-            <TextField
-              fullWidth
-              type="number"
-              label="Year"
-              name="Year"
-              value={carData.Year}
-              onChange={handleChangeTextField}
-              placeholder="Year"
-              disabled
-            />
-            <TextField
-              fullWidth
-              label="Price"
-              name="Price"
-              value={carData.Price}
-              onChange={handleChangeTextField}
-              placeholder="Price"
-            />
-            <InputLabel id="availability-label">Availability</InputLabel>
-            <Select
-              fullWidth
-              labelId="availability-label"
-              name="Availability"
-              value={carData.Availability}
-              onChange={handleChangeSelect}
-              placeholder="Availability"
+          <TextField
+            fullWidth
+            label="Model"
+            name="Model"
+            value={carData.Model}
+            onChange={handleChangeTextField}
+            placeholder="Model"
+            disabled
+          />
+          <TextField
+            fullWidth
+            label="VIN"
+            name="VIN"
+            value={carData.VIN}
+            onChange={handleChangeTextField}
+            placeholder="VIN"
+            disabled
+          />
+          <TextField
+            fullWidth
+            label="Color"
+            name="Color"
+            value={carData.Color}
+            onChange={handleChangeTextField}
+            placeholder="Color"
+          />
+          <TextField
+            fullWidth
+            type="number"
+            label="Year"
+            name="Year"
+            value={carData.Year}
+            onChange={handleChangeTextField}
+            placeholder="Year"
+            disabled
+          />
+          <TextField
+            fullWidth
+            label="Price"
+            name="Price"
+            value={carData.Price}
+            onChange={handleChangeTextField}
+            placeholder="Price"
+          />
+          <InputLabel id="availability-label">Availability</InputLabel>
+          <Select
+            fullWidth
+            labelId="availability-label"
+            name="Availability"
+            value={carData.Availability}
+            onChange={handleChangeSelect}
+            placeholder="Availability"
+          >
+            <MenuItem value="yes">Yes</MenuItem>
+            <MenuItem value="no">No</MenuItem>
+          </Select>
+          <Box sx={StyledBoxFlexEnd}>
+            <Button
+              variant="contained"
+              onClick={handleAdd}
+              disabled={inputIsDisabled(carData)}
             >
-              <MenuItem value="yes">Yes</MenuItem>
-              <MenuItem value="no">No</MenuItem>
-            </Select>
-            <Box sx={StyledBoxFlexEnd}>
-              <Button
-                variant="contained"
-                onClick={handleAdd}
-                disabled={inputIsDisabled(carData)}
-              >
-                Edit
-              </Button>
-              <Button variant="contained" onClick={handleEditClose}>
-                Close
-              </Button>
-            </Box>
+              Edit
+            </Button>
+            <Button variant="contained" onClick={handleEditClose}>
+              Close
+            </Button>
           </Box>
         </Box>
-      </Modal>
-    </div>
+      </Box>
+    </Modal>
   );
 };
 

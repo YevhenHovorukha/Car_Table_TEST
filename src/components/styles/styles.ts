@@ -1,9 +1,25 @@
+const StyledTableContainer = {
+  margin: "10px",
+  width: "98vw",
+  border: "1px solid rgba(224, 224, 224, 1)",
+};
+
+const StyledTextFieldTable = {
+  m: 1,
+};
+
+const StyledButton = {
+  m: 1,
+  height: "56px",
+};
+
 const StyleModalBox = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  maxWidth: "50%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -40,4 +56,7 @@ export {
   StyledBoxFlexEnd,
   StyledCenteredTypography,
   StyledBoxCenter,
+  StyledTableContainer,
+  StyledButton,
+  StyledTextFieldTable,
 };

@@ -7,10 +7,7 @@ import { ICar } from "./components/types/types";
 import { Button } from "@mui/material";
 import { getCarsData } from "./utils/helpers";
 import AddModal from "./components/AddModal";
-
-const ButtonStyled = {
-  margin: "10px",
-};
+import { StyledButton } from "./components/styles/styles";
 
 const App = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -48,7 +45,7 @@ const App = () => {
   return (
     <>
       <Button
-        sx={ButtonStyled}
+        sx={StyledButton}
         variant="contained"
         size="large"
         onClick={handlAddOpen}
