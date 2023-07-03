@@ -41,6 +41,7 @@ const MyTable = () => {
 
   const hanlderChangeSeacrh = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
+    setPage(0);
   };
 
   const newData: ICarTableData[] = useMemo(() => {
