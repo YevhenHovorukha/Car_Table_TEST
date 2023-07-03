@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Car_Table_TEST/static/js/main.8e45176d.js",
+    "main.js": "/Car_Table_TEST/static/js/main.cda9d4c5.js",
     "index.html": "/Car_Table_TEST/index.html",
-    "main.8e45176d.js.map": "/Car_Table_TEST/static/js/main.8e45176d.js.map"
+    "main.cda9d4c5.js.map": "/Car_Table_TEST/static/js/main.cda9d4c5.js.map"
   },
   "entrypoints": [
-    "static/js/main.8e45176d.js"
+    "static/js/main.cda9d4c5.js"
   ]
 }
