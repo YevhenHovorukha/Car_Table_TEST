@@ -53,6 +53,9 @@ const filterData = (
       ) {
         return true;
       }
+      if (typeof value === "number" && value.toString().includes(searchTerm)) {
+        return true;
+      }
       return false;
     });
   });

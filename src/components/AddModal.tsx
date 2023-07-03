@@ -33,7 +33,7 @@ const AddModal = ({ open, handleAddClose }: AddModalProps) => {
     Color: "",
     Year: 0,
     Price: "$1000",
-    Availability: "",
+    Availability: "yes",
     Actions: [],
   });
 
